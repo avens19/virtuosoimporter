@@ -44,8 +44,9 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
         p_username = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        p_subject = new javax.swing.JTextField();
         p_password = new javax.swing.JPasswordField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        p_subject = new javax.swing.JTextArea();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(VirtuosoImporterPanel1.class, "VirtuosoImporterPanel1.jLabel1.text")); // NOI18N
 
@@ -78,19 +79,21 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, org.openide.util.NbBundle.getMessage(VirtuosoImporterPanel1.class, "VirtuosoImporterPanel1.jLabel5.text")); // NOI18N
 
-        p_subject.setText(org.openide.util.NbBundle.getMessage(VirtuosoImporterPanel1.class, "VirtuosoImporterPanel1.p_subject.text")); // NOI18N
-        p_subject.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                p_usernameKeyTyped(evt);
-            }
-        });
-
         p_password.setText(org.openide.util.NbBundle.getMessage(VirtuosoImporterPanel1.class, "VirtuosoImporterPanel1.p_password.text")); // NOI18N
         p_password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 p_usernameKeyTyped(evt);
             }
         });
+
+        p_subject.setColumns(20);
+        p_subject.setRows(5);
+        p_subject.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                p_usernameKeyTyped(evt);
+            }
+        });
+        jScrollPane1.setViewportView(p_subject);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,8 +112,8 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
                     .addComponent(p_username, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(p_graph)
                     .addComponent(p_host)
-                    .addComponent(p_subject)
-                    .addComponent(p_password, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                    .addComponent(p_password, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -132,10 +135,10 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(p_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(p_subject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -150,10 +153,11 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField p_graph;
     private javax.swing.JTextField p_host;
     private javax.swing.JPasswordField p_password;
-    private javax.swing.JTextField p_subject;
+    private javax.swing.JTextArea p_subject;
     private javax.swing.JTextField p_username;
     // End of variables declaration//GEN-END:variables
 
