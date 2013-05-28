@@ -9,6 +9,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
+import java.util.List;
 import org.gephi.data.attributes.api.AttributeColumn;
 import org.gephi.data.attributes.api.AttributeModel;
 import org.gephi.data.attributes.api.AttributeType;
@@ -41,6 +42,7 @@ public class VirtuosoImporter implements SpigotImporter, LongTask {
     public String username = "dba";
     public String password = "dba";
     public String subject = "";
+    public int level = 0;
     ContainerLoader container;
     Report report;
     private ProgressTicket progressTicket;
@@ -59,11 +61,10 @@ public class VirtuosoImporter implements SpigotImporter, LongTask {
 
         try {
             for (String sub : subjects) {
-                ExtendedIterator ei = graph.find(Node.createURI(sub), Node.ANY, Node.ANY);
-                while (ei.hasNext()) {
-                    Triple t = (Triple)ei.next();
+                List<Triple> list = VirtuosoLibrary.findAllTriplesForSubjectRecursively(graph, sub, level);
+                for(Triple t : list){
                     
-                    NodeDraft node1 = null;
+                    NodeDraft node1;
                     if (container.nodeExists(t.getSubject().toString())) {
                         node1 = container.getNode(t.getSubject().toString());
                     } else {
@@ -73,7 +74,7 @@ public class VirtuosoImporter implements SpigotImporter, LongTask {
                         //Don't forget to add the node
                         container.addNode(node1);
                     }
-                    NodeDraft node2 = null;
+                    NodeDraft node2;
                     if (!t.getObject().isLiteral()) {
                         if (container.nodeExists(t.getObject().toString())) {
                             node2 = container.getNode(t.getObject().toString());

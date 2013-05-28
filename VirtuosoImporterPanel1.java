@@ -7,6 +7,8 @@ package org.ualberta.virtuosoimporter;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ChangeListener;
 import org.openide.WizardDescriptor;
 import org.openide.util.HelpCtx;
@@ -19,6 +21,11 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
 
     private Component component;
     private List<ChangeListener> listeners;
+
+    @Override
+    public String getName() {
+        return "Select Datasource";
+    }
 
     /**
      * Creates new form VirtuosoImporterPanel1
@@ -47,6 +54,8 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
         p_password = new javax.swing.JPasswordField();
         jScrollPane1 = new javax.swing.JScrollPane();
         p_subject = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        p_recursive = new javax.swing.JComboBox();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(VirtuosoImporterPanel1.class, "VirtuosoImporterPanel1.jLabel1.text")); // NOI18N
 
@@ -95,6 +104,10 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
         });
         jScrollPane1.setViewportView(p_subject);
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(VirtuosoImporterPanel1.class, "VirtuosoImporterPanel1.jLabel6.text")); // NOI18N
+
+        p_recursive.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,18 +115,25 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(p_username, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(p_graph)
-                    .addComponent(p_host)
-                    .addComponent(p_password, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(p_graph, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(p_username, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(p_password, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                            .addComponent(p_host)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(p_recursive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -139,7 +159,11 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(p_recursive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -153,10 +177,12 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField p_graph;
     private javax.swing.JTextField p_host;
     private javax.swing.JPasswordField p_password;
+    private javax.swing.JComboBox p_recursive;
     private javax.swing.JTextArea p_subject;
     private javax.swing.JTextField p_username;
     // End of variables declaration//GEN-END:variables
@@ -173,6 +199,7 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
 
     @Override
     public void readSettings(Object data) {
+        
     }
 
     @Override
@@ -216,11 +243,20 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
         importer.username = p_username.getText();
         importer.password = String.valueOf(p_password.getPassword());
         importer.subject = p_subject.getText();
+        
+        DefaultComboBoxModel model = (DefaultComboBoxModel)p_recursive.getModel();
+        Integer level = (Integer)model.getSelectedItem();
+        importer.level = level;
     }
 
     public void setup() {
         p_host.setText("jdbc:virtuoso://localhost:1111");
         p_username.setText("dba");
         p_password.setText("");
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.addElement(0);
+        model.addElement(1);
+        model.addElement(2);
+        p_recursive.setModel(model);
     }
 }
