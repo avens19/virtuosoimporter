@@ -56,6 +56,8 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
         p_subject = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         p_recursive = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
+        p_language = new javax.swing.JTextField();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(VirtuosoImporterPanel1.class, "VirtuosoImporterPanel1.jLabel1.text")); // NOI18N
 
@@ -108,6 +110,10 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
 
         p_recursive.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, org.openide.util.NbBundle.getMessage(VirtuosoImporterPanel1.class, "VirtuosoImporterPanel1.jLabel7.text")); // NOI18N
+
+        p_language.setText(org.openide.util.NbBundle.getMessage(VirtuosoImporterPanel1.class, "VirtuosoImporterPanel1.p_language.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,13 +133,17 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
                             .addComponent(p_graph, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(p_username, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(p_password, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                             .addComponent(p_host)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(p_recursive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(p_language))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -142,11 +152,14 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(p_host, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(p_graph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(p_host, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(p_graph, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(p_language, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -159,7 +172,7 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(p_recursive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -178,9 +191,11 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField p_graph;
     private javax.swing.JTextField p_host;
+    private javax.swing.JTextField p_language;
     private javax.swing.JPasswordField p_password;
     private javax.swing.JComboBox p_recursive;
     private javax.swing.JTextArea p_subject;
@@ -243,6 +258,7 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
         importer.username = p_username.getText();
         importer.password = String.valueOf(p_password.getPassword());
         importer.subject = p_subject.getText();
+        importer.language = p_language.getText();
         
         DefaultComboBoxModel model = (DefaultComboBoxModel)p_recursive.getModel();
         Integer level = (Integer)model.getSelectedItem();
@@ -253,6 +269,7 @@ public class VirtuosoImporterPanel1 extends javax.swing.JPanel implements Wizard
         p_host.setText("jdbc:virtuoso://localhost:1111");
         p_username.setText("dba");
         p_password.setText("");
+        p_language.setText("en");
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         model.addElement(0);
         model.addElement(1);

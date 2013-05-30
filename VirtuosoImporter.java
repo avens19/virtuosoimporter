@@ -43,6 +43,7 @@ public class VirtuosoImporter implements SpigotImporter, LongTask {
     public String password = "dba";
     public String subject = "";
     public int level = 0;
+    public String language = "en";
     ContainerLoader container;
     Report report;
     private ProgressTicket progressTicket;
@@ -63,38 +64,43 @@ public class VirtuosoImporter implements SpigotImporter, LongTask {
             for (String sub : subjects) {
                 List<Triple> list = VirtuosoLibrary.findAllTriplesForSubjectRecursively(graph, sub, level);
                 for(Triple t : list){
-                    
+                    Node subj = t.getSubject();
                     NodeDraft node1;
-                    if (container.nodeExists(t.getSubject().toString())) {
-                        node1 = container.getNode(t.getSubject().toString());
+                    if (container.nodeExists(subj.toString())) {
+                        node1 = container.getNode(subj.toString());
                     } else {
                         node1 = container.factory().newNodeDraft();
-                        node1.setId(t.getSubject().toString());
+                        node1.setId(subj.toString());
 
                         //Don't forget to add the node
                         container.addNode(node1);
                     }
                     NodeDraft node2;
-                    if (!t.getObject().isLiteral()) {
-                        if (container.nodeExists(t.getObject().toString())) {
-                            node2 = container.getNode(t.getObject().toString());
+                    Node obj = t.getObject();
+                    if (!obj.isLiteral()) {
+                        if (container.nodeExists(obj.toString())) {
+                            node2 = container.getNode(obj.toString());
                         } else {
                             node2 = container.factory().newNodeDraft();
-                            node2.setId(t.getObject().toString());
+                            node2.setId(obj.toString());
 
                             //Don't forget to add the node
                             container.addNode(node2);
                         }
                     } else {
+                        //does not create node or edge if language does not match
+                        if(obj.getLiteralLanguage() != null && !obj.getLiteralLanguage().isEmpty() && !language.isEmpty() && !obj.getLiteralLanguage().equals(language))
+                            continue;
+                        
                         node2 = container.factory().newNodeDraft();
-                        if (!container.nodeExists(t.getObject().toString())) {
-                            node2.setId(t.getObject().toString());
+                        if (!container.nodeExists(obj.toString())) {
+                            node2.setId(obj.toString());
                         } else {
                             int i = 2;
-                            while (container.nodeExists(t.getObject().toString() + "_" + String.valueOf(i))) {
+                            while (container.nodeExists(obj.toString() + "_" + String.valueOf(i))) {
                                 i++;
                             }
-                            node2.setId(t.getObject().toString() + "_" + String.valueOf(i));
+                            node2.setId(obj.toString() + "_" + String.valueOf(i));
                         }
 
                         container.addNode(node2);
